@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Booking</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav>
+      <div class="logo">Troops Travels</div>
+
+      <div class="nav-links">
+        <a href="homepage.html">Home</a>
+        <a href="packages.html">Packages</a>
+        <a href="booking.html">Booking</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="#contact">Contact</a>
+        <a href="#" onclick="openLogin()">Login</a>
+        <a href="#" onclick="openSignup()">Sign Up</a>
+      </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+      <h1>BOOK YOUR TRIP</h1>
+      <h2>Plan your journey with us</h2>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+      <form id="bookingForm">
+        <!-- ❌ Removed manual name input -->
+
+        <select id="packageSelect" required>
+          <option value="">Select Package</option>
+        </select>
+
+        <input
+          type="text"
+          id="travelDate"
+          placeholder="Travel Date"
+          onfocus="this.type = 'date'"
+          onblur="if (!this.value) this.type = 'text';"
+          required
+        />
+
+        <input
+          type="number"
+          id="people"
+          placeholder="Number of People"
+          required
+        />
+
+        <select id="paymentMethod" required>
+          <option value="">Select Payment Method</option>
+          <option value="UPI">UPI</option>
+          <option value="Card">Card</option>
+        </select>
+
+        <button type="submit">Proceed to Payment</button>
+      </form>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer" id="contact">
+      <div class="footer-container">
+        <div class="footer-section">
+          <h3>Troops Travels</h3>
+          <p>Your journey, our priority.</p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <p><a href="homepage.html">Home</a></p>
+          <p><a href="packages.html">Packages</a></p>
+          <p><a href="booking.html">Booking</a></p>
+          <p><a href="gallery.html">Gallery</a></p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p>Phone: 9999999999</p>
+          <p>Email: info@troops.com</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        © 2026 Troops Travels | All Rights Reserved
+      </div>
+    </footer>
+
+    <!-- LOGIN MODAL -->
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Login</h2>
+        <input type="email" id="loginEmail" placeholder="Email" />
+        <input type="password" id="loginPassword" placeholder="Password" />
+        <button onclick="login()">Login</button>
+
+        <p style="text-align: center; margin-top: 10px">
+          Don't have an account?
+          <a href="#" onclick="openSignup()">Sign up</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- SIGNUP MODAL -->
+    <div id="signupModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Sign Up</h2>
+        <input type="text" id="signupName" placeholder="Name" />
+        <input type="email" id="signupEmail" placeholder="Email" />
+        <input type="password" id="signupPassword" placeholder="Password" />
+        <button onclick="signup()">Sign Up</button>
+
+        <p style="text-align: center; margin-top: 10px">
+          Already have an account?
+          <a href="#" onclick="openLogin()">Login</a>
+        </p>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+
+    <!-- LOAD PACKAGES -->
+    <script>
+      async function loadPackagesDropdown() {
+        try {
+          const res = await fetch("http://localhost:3000/packages");
+          const data = await res.json();
+
+          const select = document.getElementById("packageSelect");
+
+          data.forEach((pkg) => {
+            const option = document.createElement("option");
+            option.value = pkg._id.toString();
+            option.textContent = pkg.title;
+            select.appendChild(option);
+          });
+
+          // ✅ auto-select using URL (FINAL FIX)
+          const urlParams = new URLSearchParams(window.location.search);
+          const selectedId = urlParams.get("packageId");
+
+          if (selectedId) {
+            select.value = selectedId;
+            console.log("Auto-selected:", selectedId);
+          }
+        } catch (err) {
+          console.error("Error loading packages:", err);
+        }
+      }
+
+      loadPackagesDropdown();
+    </script>
+
+    <!-- SUBMIT BOOKING -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("bookingForm");
+
+        if (!form) return;
+
+        form.addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const user = JSON.parse(sessionStorage.getItem("user"));
+
+          // ❌ BLOCK if not logged in
+          if (!user) {
+            alert("Please login first");
+            openLogin();
+            return;
+          }
+
+          const packageId = document.getElementById("packageSelect").value;
+
+          if (!packageId) {
+            alert("Please select a package");
+            return;
+          }
+
+          const people = parseInt(document.getElementById("people").value);
+          const date = document.getElementById("travelDate").value;
+          const paymentMethod = document.getElementById("paymentMethod").value;
+          alert("Processing payment...");
+
+          const success = Math.random() > 0.2;
+
+          if (!success) {
+            alert("Payment Failed ❌");
+            return;
+          }
+
+          alert("Payment Successful ✅");
+          try {
+            const res = await fetch("http://localhost:3000/bookings", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                userName: user.name, // ✅ always from login
+                packageId,
+                people,
+                travelDate: date,
+                payment: {
+                  method: paymentMethod,
+                  status: "confirmed",
+                },
+              }),
+            });
+
+            const data = await res.json();
+
+            alert(data.message || "Booking successful");
+          } catch (err) {
+            console.error(err);
+            alert("Error submitting booking");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

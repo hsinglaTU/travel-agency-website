@@ -1,0 +1,552 @@
+/* ===== GLOBAL ===== */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding-top: 60px;
+  background-color: #f5f7f9;
+}
+
+/* ===== NAVBAR ===== */
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  background: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 30px;
+  border-bottom: 1px solid #eee;
+
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 16px;
+  font-weight: 700;
+  color: #05364d;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #05364d;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* ===== HEADER ===== */
+
+header {
+  position: relative;
+
+  background-image: url("https://images.unsplash.com/photo-1498307833015-e7b400441eb8?q=80&w=2128&auto=format&fit=crop");
+
+  margin: 80px auto 20px;
+  max-width: 1200px;
+  height: 300px;
+
+  border-radius: 12px;
+
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  color: white;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 12px;
+}
+
+header * {
+  position: relative;
+  z-index: 1;
+}
+
+header h1 {
+  font-size: 34px;
+  margin-bottom: 8px;
+}
+
+header h2 {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+/* ===== MAIN ===== */
+
+main {
+  padding: 10px 20px 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* ===== HOMEPAGE ===== */
+
+.home-intro {
+  text-align: center;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.home-highlights {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.highlight-box {
+  background: white;
+  padding: 15px;
+  width: 250px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== FORM ===== */
+
+form {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+
+  background: white;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+form input,
+form select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+form button {
+  padding: 10px;
+  background: #05364d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background: #032a3a;
+}
+
+/* ===== GALLERY ===== */
+
+.gallery-title {
+  text-align: center;
+  margin: 30px 0 10px;
+  font-size: 20px;
+  color: #05364d;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  padding: 10px 20px;
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* ===== FOOTER ===== */
+
+.footer {
+  background: #05364d;
+  color: white;
+  margin-top: 50px;
+}
+
+.footer-container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 30px 20px;
+
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-section {
+  min-width: 200px;
+  margin-bottom: 15px;
+}
+
+.footer-section h3 {
+  margin-bottom: 8px;
+}
+
+.footer-section p {
+  margin: 4px 0;
+}
+
+.footer-section a {
+  color: #ddd;
+  text-decoration: none;
+}
+
+.footer-section a:hover {
+  color: white;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 12px;
+  font-size: 13px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ===== MODAL (FIXED) ===== */
+
+.modal {
+  display: none; /* IMPORTANT: hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.6);
+
+  z-index: 2000;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 25px;
+  width: 320px;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  position: relative;
+}
+
+.modal-content input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.modal-content button {
+  padding: 10px;
+  background: #05364d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background: #032a3a;
+}
+
+.close {
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#packagesContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  padding: 30px;
+}
+
+/* CARD */
+.package-card {
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  transition: 0.25s ease;
+}
+
+.package-card:hover {
+  transform: translateY(-6px);
+}
+
+/* IMAGE */
+.card-img img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+/* CONTENT */
+.card-content {
+  padding: 16px;
+}
+
+.card-content h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+/* TOP ROW (country + price) */
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.country {
+  font-size: 13px;
+  color: #777;
+}
+
+.price {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0d6efd;
+}
+
+/* TEXT */
+.duration {
+  font-size: 13px;
+  margin-bottom: 4px;
+  color: #444;
+}
+
+.locations {
+  font-size: 13px;
+  color: #444;
+  margin-bottom: 8px;
+}
+
+/* META (rating + slots) */
+.meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+/* DETAILS */
+.card-content details {
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+.card-content summary {
+  font-family: "Segoe UI", sans-serif; /* clean modern font */
+  font-weight: 600;
+  font-size: 14px;
+  color: #0d6efd;
+  cursor: pointer;
+}
+
+.card-content ul {
+  padding-left: 16px;
+  margin-top: 5px;
+}
+
+/* BUTTON */
+.card-content button {
+  width: 100%;
+  padding: 9px;
+  margin-top: 12px;
+  background: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.card-content button:hover {
+  background: #0b5ed7;
+}
+
+/* USER MENU */
+.user-menu {
+  position: relative;
+  margin-left: 10px;
+}
+
+.user-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+/* AVATAR */
+.avatar {
+  width: 32px;
+  height: 32px;
+  background: #0d6efd;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* DROPDOWN */
+.dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 45px;
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+  min-width: 160px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.dropdown-item:hover {
+  background: #f2f2f2;
+}
+
+.logout {
+  color: red;
+  font-weight: 500;
+}
+
+/* BOOKING POPUP */
+.booking-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.4);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999; /* 🔥 IMPORTANT */
+}
+
+.booking-box {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 320px;
+
+  transform: none; /* 🔥 remove any transform issues */
+  filter: none; /* 🔥 prevents blur */
+  backdrop-filter: none; /* 🔥 critical fix */
+
+  text-rendering: optimizeLegibility;
+}
+
+.booking-card {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+.booking-box button {
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  background: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 6px;
+}
+
+.booking-box h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+
+  color: #111;
+  letter-spacing: 0.3px;
+
+  transform: none;
+}
+
+.booking-card h4 {
+  margin: 0 0 5px;
+  font-size: 15px;
+}
+
+.booking-card p {
+  margin: 2px 0;
+  font-size: 13px;
+}
+
+.confirmed {
+  color: green;
+  font-weight: 600;
+}
+
+.failed {
+  color: red;
+  font-weight: 600;
+}

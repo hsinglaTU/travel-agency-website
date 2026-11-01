@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav>
+      <div class="logo">Troops Travels</div>
+
+      <div class="nav-links">
+        <a href="homepage.html">Home</a>
+        <a href="packages.html">Packages</a>
+        <a href="booking.html">Booking</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="#contact">Contact</a>
+        <a href="#" onclick="openLogin()">Login</a>
+        <a href="#" onclick="openSignup()">Sign Up</a>
+      </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+      <h1>TROOPS TRAVELS</h1>
+      <h2>Explore the World with Us!</h2>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+      <section class="home-intro">
+        <h3>Welcome to Troops Travels</h3>
+        <p>
+          We create unforgettable travel experiences across the globe. From
+          tropical beaches to cultural cities and adventure destinations, we
+          offer curated packages designed for every traveler.
+        </p>
+      </section>
+
+      <section class="home-highlights">
+        <div class="highlight-box">
+          <h4>Top Destinations</h4>
+          <p>Explore Bali, Dubai, Paris, Goa, Japan and more.</p>
+        </div>
+
+        <div class="highlight-box">
+          <h4>Easy Booking</h4>
+          <p>Quick and simple booking system for your convenience.</p>
+        </div>
+
+        <div class="highlight-box">
+          <h4>Trusted Service</h4>
+          <p>Reliable travel planning with real customer satisfaction.</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer" id="contact">
+      <div class="footer-container">
+        <div class="footer-section">
+          <h3>Troops Travels</h3>
+          <p>Your journey, our priority.</p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <p><a href="homepage.html">Home</a></p>
+          <p><a href="packages.html">Packages</a></p>
+          <p><a href="booking.html">Booking</a></p>
+          <p><a href="gallery.html">Gallery</a></p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p>Phone: 9999999999</p>
+          <p>Email: info@troops.com</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        © 2026 Troops Travels | All Rights Reserved
+      </div>
+    </footer>
+
+    <!-- LOGIN MODAL -->
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Login</h2>
+        <input type="email" id="loginEmail" placeholder="Email" />
+        <input type="password" id="loginPassword" placeholder="Password" />
+        <button onclick="login()">Login</button>
+        <p style="text-align: center; margin-top: 10px">
+          Don't have an account?
+          <a href="#" onclick="openSignup()">Sign up</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- SIGNUP MODAL -->
+    <div id="signupModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Sign Up</h2>
+        <input type="text" id="signupName" placeholder="Name" />
+        <input type="email" id="signupEmail" placeholder="Email" />
+        <input type="password" id="signupPassword" placeholder="Password" />
+        <button onclick="signup()">Sign Up</button>
+        <p style="text-align: center; margin-top: 10px">
+          Already have an account?
+          <a href="#" onclick="openLogin()">Login</a>
+        </p>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
